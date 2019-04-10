@@ -1,0 +1,8 @@
+---
+# defaults file for y
+
+y_import_from: /tmp/import
+y_export_to: /tmp/export
+
+y_preset:
+  - name: monochrome

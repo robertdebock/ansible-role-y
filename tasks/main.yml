@@ -1,0 +1,27 @@
+---
+# tasks file for y
+- name: install requirements
+  package:
+    name: "{{ y_requirements }}"
+    state: present
+  register: y_install_requirements
+  until: y_install_requirements is succeeded
+  retries: 3
+
+- name: find files to convert {{ y_import_from }}
+  find:
+    path: "{{ y_import_from }}"
+    excludes: "*.pgm"
+  when:
+    - y_import_from is defined
+  register: y_files
+
+- name: loop over found images
+  include: image.yml
+  with_items: "{{ y_files.files }}"
+  loop_control:
+    loop_var: image
+  when:
+    - y_files is defined
+    - y_files.files is defined
+    - y_files.files

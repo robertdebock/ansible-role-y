@@ -1,0 +1,10 @@
+---
+# vars file for y
+_y_requirements:
+  default:
+    - dcraw
+
+y_requirements: "{{ _y_requirements[ansible_distribution] | default(_y_requirements['default']) }}"
+
+y_command_options:
+  monochrome: "-d"

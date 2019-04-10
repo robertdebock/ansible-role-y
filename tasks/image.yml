@@ -1,0 +1,10 @@
+---
+- name: processing {{ image.path | basename }}
+  shell: dcraw -c "{{ y_command_options[y_preset] }}" "{{ image.path }}" > "{{ y_export_to }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+  args:
+    creates: "{{ y_export_to }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+
+- name: copy {{ image.path | basename }} back
+  fetch:
+    src: "{{ y_export_to }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+    dest: /tmp

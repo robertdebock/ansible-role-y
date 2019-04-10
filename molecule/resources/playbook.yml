@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars:
+    y_import_from: /data/in
+    y_export_to: /data/out
+    y_preset: monochrome
+
+  roles:
+    - ansible-role-y
