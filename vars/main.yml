@@ -2,9 +2,13 @@
 # vars file for y
 _y_requirements:
   default:
+    - bash
     - dcraw
+    - perl-Image-ExifTool
 
 y_requirements: "{{ _y_requirements[ansible_distribution] | default(_y_requirements['default']) }}"
 
 y_command_options:
   monochrome: "-d"
+
+y_export_path: "{{ y_export_to }}/{{ year.stdout }}/{{ month.stdout }}/{{ day.stdout }}"

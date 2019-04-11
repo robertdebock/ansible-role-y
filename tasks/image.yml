@@ -1,10 +1,42 @@
 ---
-- name: processing {{ image.path | basename }}
-  shell: dcraw -c "{{ y_command_options[y_preset] }}" "{{ image.path }}" > "{{ y_export_to }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+- name: Save the year
+  shell: set -o pipefail ; exiftool {{ image.path }} -d "%Y" | grep "Create Date" | awk '{print $NF}'
   args:
-    creates: "{{ y_export_to }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+    creates: nothing
+    executable: /bin/bash
+  register: year
+  changed_when: no
+  check_mode: no
 
-- name: copy {{ image.path | basename }} back
+- name: Save the month
+  shell: set -o pipefail ; exiftool {{ image.path }} -d "%m" | grep "Create Date" | awk '{print $NF}'
+  args:
+    creates: nothing
+    executable: /bin/bash
+  register: month
+  changed_when: no
+  check_mode: no
+
+- name: Save the day
+  shell: set -o pipefail ; exiftool {{ image.path }} -d "%d" | grep "Create Date" | awk '{print $NF}'
+  args:
+    creates: nothing
+    executable: /bin/bash
+  register: day
+  changed_when: no
+  check_mode: no
+
+- name: ensure directory structure exists
+  file:
+    path: "{{ y_export_path  }}"
+    state: directory
+
+- name: processing {{ image.path | basename }}
+  shell: dcraw -c "{{ y_command_options[y_preset] }}" "{{ image.path }}" > "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+  args:
+    creates: "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+
+- name: copying processed image back
   fetch:
-    src: "{{ y_export_to }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+    src: "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
     dest: /tmp
