@@ -5,6 +5,14 @@ _y_requirements:
     - bash
     - dcraw
     - perl-Image-ExifTool
+  Debian:
+    - bash
+    - dcraw
+    - libimage-exiftool-perl
+  Ubuntu:
+    - bash
+    - dcraw
+    - libimage-exiftool-perl
 
 y_requirements: "{{ _y_requirements[ansible_distribution] | default(_y_requirements['default']) }}"
 
