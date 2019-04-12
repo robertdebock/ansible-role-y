@@ -6,6 +6,7 @@
 
   roles:
     - robertdebock.bootstrap
+    - robertdebock.epel
 
   tasks:
     - name: create /data

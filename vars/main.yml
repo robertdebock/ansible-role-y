@@ -5,6 +5,10 @@ _y_requirements:
     - bash
     - dcraw
     - perl-Image-ExifTool
+  Archlinux:
+    - bash
+    - dcraw
+    - perl-image-exiftool
   Debian:
     - bash
     - dcraw
