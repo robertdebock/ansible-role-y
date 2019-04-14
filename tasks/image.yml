@@ -1,6 +1,6 @@
 ---
 - name: Save the year
-  shell: set -o pipefail ; exiftool {{ image.path }} -d "%Y" | grep "Create Date" | awk '{print $NF}'
+  shell: set -o pipefail ; {{ y_exiftool_binary }} {{ image.path }} -d "%Y" | grep "Create Date" | awk '{print $NF}'
   args:
     creates: nothing
     executable: /bin/bash
@@ -9,7 +9,7 @@
   check_mode: no
 
 - name: Save the month
-  shell: set -o pipefail ; exiftool {{ image.path }} -d "%m" | grep "Create Date" | awk '{print $NF}'
+  shell: set -o pipefail ; {{ y_exiftool_binary }} {{ image.path }} -d "%m" | grep "Create Date" | awk '{print $NF}'
   args:
     creates: nothing
     executable: /bin/bash
@@ -18,7 +18,7 @@
   check_mode: no
 
 - name: Save the day
-  shell: set -o pipefail ; exiftool {{ image.path }} -d "%d" | grep "Create Date" | awk '{print $NF}'
+  shell: set -o pipefail ; {{ y_exiftool_binary }} {{ image.path }} -d "%d" | grep "Create Date" | awk '{print $NF}'
   args:
     creates: nothing
     executable: /bin/bash
