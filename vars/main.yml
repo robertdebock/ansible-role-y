@@ -6,6 +6,7 @@ _y_requirements:
     - dcraw
     - perl-Image-ExifTool
   Archlinux:
+    - awk
     - bash
     - dcraw
     - perl-image-exiftool
