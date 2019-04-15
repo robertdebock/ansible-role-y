@@ -23,7 +23,7 @@ y_requirements: "{{ _y_requirements[ansible_distribution] | default(_y_requireme
 
 _y_exiftool_binary:
   default: exiftool
-  Archlinux: /usr/bin/vendor_perl/exiftool 
+  Archlinux: /usr/bin/vendor_perl/exiftool
 
 y_exiftool_binary: "{{ _y_exiftool_binary[ansible_distribution] | default(_y_exiftool_binary['default']) }}"
 y_command_options:
