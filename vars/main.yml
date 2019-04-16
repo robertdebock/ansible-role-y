@@ -9,6 +9,7 @@ _y_requirements:
     - awk
     - bash
     - dcraw
+    - grep
     - perl-image-exiftool
   Debian:
     - bash
