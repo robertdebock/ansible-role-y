@@ -31,12 +31,23 @@
     path: "{{ y_export_path  }}"
     state: directory
 
-- name: processing {{ image.path | basename }}
-  shell: dcraw -c "{{ y_command_options[y_preset] }}" "{{ image.path }}" > "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
-  args:
-    creates: "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+- name: process images
+  block:
+    - name: processing {{ image.path | basename }}
+      shell: dcraw -c "{{ y_command_options[y_preset] }}" "{{ image.path }}" > "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+      args:
+        creates: "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
 
-- name: copying processed image back
+    - name: copying processed image back
+      fetch:
+        src: "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
+        dest: "{{ y_export_to }}"
+      when:
+        - y_convert_images
+
+- name: copying unprocessed image back
   fetch:
-    src: "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
-    dest: /tmp
+    src: "{{ y_export_path }}/{{ (image.path | basename }}"
+    dest: "{{ y_export_to }}"
+  when:
+    - not y_convert_images

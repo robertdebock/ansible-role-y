@@ -4,5 +4,7 @@
 y_import_from: /tmp/import
 y_export_to: /tmp/export
 
+y_convert_images: yes
+
 y_preset:
   - name: monochrome
