@@ -28,7 +28,7 @@
 
 - name: ensure directory structure exists
   file:
-    path: "{{ item }}" 
+    path: "{{ item }}"
     state: directory
   with_items:
     - "{{ y_export_path }}"
