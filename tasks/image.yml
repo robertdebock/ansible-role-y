@@ -28,11 +28,8 @@
 
 - name: ensure directory structure exists
   file:
-    path: "{{ item }}"
+    path: "{{ y_export_path }}"
     state: directory
-  with_items:
-    - "{{ y_export_path }}"
-    - "{{ y_export_to }}"
 
 - name: process images
   block:
@@ -44,7 +41,7 @@
     - name: copying processed image back
       fetch:
         src: "{{ y_export_path }}/{{ (image.path | basename | splitext)[0] }}.pgm"
-        dest: "{{ y_export_to }}"
+        dest: "{{ y_export_to }}/{{ (image.path | basename | splitext)[0] }}.pgm"
         flat: yes
       when:
         - y_convert_images | bool
