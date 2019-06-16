@@ -1,5 +1,5 @@
 ---
-- name: Save the year
+- name: save the year
   shell: set -o pipefail ; {{ y_exiftool_binary }} {{ image.path }} -d "%Y" | grep "Create Date" | awk '{print $NF}'
   args:
     creates: nothing
@@ -8,7 +8,7 @@
   changed_when: no
   check_mode: no
 
-- name: Save the month
+- name: save the month
   shell: set -o pipefail ; {{ y_exiftool_binary }} {{ image.path }} -d "%m" | grep "Create Date" | awk '{print $NF}'
   args:
     creates: nothing
@@ -17,7 +17,7 @@
   changed_when: no
   check_mode: no
 
-- name: Save the day
+- name: save the day
   shell: set -o pipefail ; {{ y_exiftool_binary }} {{ image.path }} -d "%d" | grep "Create Date" | awk '{print $NF}'
   args:
     creates: nothing
@@ -47,7 +47,7 @@
         dest: "{{ y_export_to }}"
         flat: yes
       when:
-        - y_convert_images
+        - y_convert_images | bool
 
 - name: copying unprocessed image back
   fetch:
@@ -55,4 +55,4 @@
     dest: "{{ y_export_to }}"
     flat: yes
   when:
-    - not y_convert_images
+    - not y_convert_images | bool
