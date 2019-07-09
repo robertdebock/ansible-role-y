@@ -19,7 +19,7 @@ This example is taken from `molecule/resources/playbook.yml`:
 
   vars:
     y_import_from: /data/in
-    y_export_to: /data/out
+    y_export_to: out
     y_preset: monochrome
 
   roles:
