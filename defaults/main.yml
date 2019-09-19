@@ -4,7 +4,10 @@
 y_import_from: /tmp/import
 y_export_to: /tmp/export
 
-y_convert_images: yes
-
-y_preset:
+y_presets:
   - name: monochrome
+
+# y_sizes:
+#   - thumbnail
+#   - large
+#   - original

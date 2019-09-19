@@ -8,20 +8,41 @@
   until: y_install_requirements is succeeded
   retries: 3
 
+- name: create export directory
+  file:
+    path: "{{ y_export_to }}"
+    state: directory
+
 - name: find files to convert {{ y_import_from }}
   find:
     path: "{{ y_import_from }}"
-    excludes: "*.pgm"
+    patterns: "*.jpg"
   when:
     - y_import_from is defined
-  register: y_files
+  register: y_find
 
 - name: loop over found images
   include: image.yml
-  with_items: "{{ y_files.files }}"
+  with_items: "{{ y_find.files }}"
   loop_control:
     loop_var: image
   when:
-    - y_files is defined
-    - y_files.files is defined
-    - y_files.files
+    - y_find is defined
+    - y_find.files is defined
+    - y_find.files
+
+- name: find converted images in {{ y_export_to }}
+  find:
+    path: "{{ y_export_to }}"
+    patterns: "*.jpg"
+  register: y_found
+
+- name: copy converted images back
+  fetch:
+    src: "{{ item.path }}"
+    dest: "{{ y_export_to }}/{{ item.path | basename }}"
+    flat: yes
+  with_items:
+    - "{{ y_found.files }}"
+  loop_control:
+    label: "{{ item.path }}"
