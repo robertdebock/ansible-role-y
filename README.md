@@ -4,7 +4,7 @@ y
 <img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="right"/>
 <a href="https://travis-ci.org/robertdebock/ansible-role-y"><img src="https://travis-ci.org/robertdebock/ansible-role-y.svg?branch=master" alt="Build status" align="left"/></a>
 
-Import and process RAW files.
+Process images
 
 Example Playbook
 ----------------
