@@ -53,7 +53,7 @@ The machine you are running this on, may need to be prepared.
         src: "{{ item }}"
         dest: /data/in
       with_items:
-        - sample.RAF
+        - in/sample.jpg
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -69,10 +69,13 @@ These variables are set in `defaults/main.yml`:
 y_import_from: /tmp/import
 y_export_to: /tmp/export
 
-y_convert_images: yes
-
-y_preset:
+y_presets:
   - name: monochrome
+
+# y_sizes:
+#   - thumbnail
+#   - large
+#   - original
 ```
 
 Requirements
@@ -121,6 +124,9 @@ This role has been tested against the following distributions and Ansible versio
 |ubuntu-rolling|yes|yes|yes*|
 
 A single star means the build may fail, it's marked as an experimental build.
+
+
+
 
 Testing
 -------
