@@ -4,9 +4,9 @@
   become: yes
   gather_facts: yes
 
-  vars:
-    y_import_from: /data/in
-    y_export_to: out
-
   roles:
-    - ansible-role-y
+    - role: ansible-role-y
+      y_import_from: /data/in
+      y_export_to: out
+      y_presets:
+        - name: monochrome

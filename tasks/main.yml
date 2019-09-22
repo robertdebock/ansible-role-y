@@ -23,7 +23,7 @@
 
 - name: loop over found images
   include: image.yml
-  with_items: "{{ y_find.files }}"
+  loop: "{{ y_find.files }}"
   loop_control:
     loop_var: image
   when:
@@ -42,7 +42,6 @@
     src: "{{ item.path }}"
     dest: "{{ y_export_to }}/{{ item.path | basename }}"
     flat: yes
-  with_items:
-    - "{{ y_found.files }}"
+  loop: "{{ y_found.files }}"
   loop_control:
     label: "{{ item.path }}"

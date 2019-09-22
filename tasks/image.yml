@@ -1,5 +1,4 @@
 ---
 - name: apply presets
   include: "{{ item.name }}.yml"
-  with_items:
-    - "{{ y_presets }}"
+  loop: "{{ y_presets }}"
