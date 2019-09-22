@@ -1,5 +1,4 @@
 ---
 - name: convert to monochrome
   command: convert {{ image.path }} -monochrome {{ y_export_to }}/{{ image.path | basename }}
-  args:
-    creates: "{{ y_export_to }}/{{ image.path | basename }}"
+  changed_when: no
