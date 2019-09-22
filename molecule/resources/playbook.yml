@@ -7,7 +7,6 @@
   vars:
     y_import_from: /data/in
     y_export_to: out
-    y_preset: monochrome
 
   roles:
     - ansible-role-y
