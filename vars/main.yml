@@ -1,4 +1,21 @@
 ---
 # vars file for y
-y_requirements:
-  - ImageMagick
+_y_requirements:
+  default:
+    - imagemagick
+  Alpine:
+    - imagemagick
+  Archlinux:
+    - imagemagick
+  CentOS:
+    - ImageMagick
+  Debian:
+    - imagemagick
+  Fedora
+    - ImageMagick
+  openSUSE Leap:
+    - ImageMagick
+  Ubuntu:
+    - imagemagick
+
+y_requirements: "{{ _y_requirements[ansible_distribution] | default(_y_requirements['default']) }}"
