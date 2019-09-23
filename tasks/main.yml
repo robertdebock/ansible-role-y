@@ -31,17 +31,11 @@
     - y_find.files is defined
     - y_find.files
 
-- name: find converted images in {{ y_export_to }}
-  find:
-    path: "{{ y_export_to }}"
-    patterns: "*.jpg"
-  register: y_found
-
 - name: copy converted images back
   fetch:
     src: "{{ item.path }}"
     dest: "{{ y_export_to }}/{{ item.path | basename }}"
     flat: yes
-  loop: "{{ y_found.files }}"
+  loop: "{{ y_find.files }}"
   loop_control:
     label: "{{ item.path }}"

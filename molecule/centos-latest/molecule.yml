@@ -24,3 +24,5 @@ provisioner:
         - meta/exception.yml
 scenario:
   name: centos-latest
+  converge_sequence:
+    - converge
