@@ -2,32 +2,20 @@
 # vars file for y
 _y_requirements:
   default:
-    - bash
-    - dcraw
-    - perl-Image-ExifTool
+    - imagemagick
+  Alpine:
+    - imagemagick
   Archlinux:
-    - awk
-    - bash
-    - dcraw
-    - grep
-    - perl-image-exiftool
+    - imagemagick
+  CentOS:
+    - ImageMagick
   Debian:
-    - bash
-    - dcraw
-    - libimage-exiftool-perl
+    - imagemagick
+  Fedora:
+    - ImageMagick
+  openSUSE Leap:
+    - ImageMagick
   Ubuntu:
-    - bash
-    - dcraw
-    - libimage-exiftool-perl
+    - imagemagick
 
 y_requirements: "{{ _y_requirements[ansible_distribution] | default(_y_requirements['default']) }}"
-
-_y_exiftool_binary:
-  default: exiftool
-  Archlinux: /usr/bin/vendor_perl/exiftool
-
-y_exiftool_binary: "{{ _y_exiftool_binary[ansible_distribution] | default(_y_exiftool_binary['default']) }}"
-y_command_options:
-  monochrome: "-d"
-
-y_export_path: "{{ y_export_to }}/{{ year.stdout }}/{{ month.stdout }}/{{ day.stdout }}"

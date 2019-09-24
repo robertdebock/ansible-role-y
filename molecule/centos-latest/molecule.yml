@@ -18,3 +18,5 @@ provisioner:
     converge: ../resources/playbook.yml
 scenario:
   name: centos-latest
+  converge_sequence:
+    - converge

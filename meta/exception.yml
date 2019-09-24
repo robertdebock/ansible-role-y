@@ -1,0 +1,4 @@
+---
+exceptions:
+  - variation: CentOS 6
+    reason: Somehow ImageMagick creates a different file each run. Not idempotent.
