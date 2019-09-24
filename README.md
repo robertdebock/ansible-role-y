@@ -17,13 +17,12 @@ This example is taken from `molecule/resources/playbook.yml`:
   become: yes
   gather_facts: yes
 
-  vars:
-    y_import_from: /data/in
-    y_export_to: out
-    y_preset: monochrome
-
   roles:
-    - robertdebock.y
+    - role: robertdebock.y
+      y_import_from: /data/in
+      y_export_to: out
+      y_presets:
+        - name: monochrome
 ```
 
 The machine you are running this on, may need to be prepared.
@@ -39,7 +38,7 @@ The machine you are running this on, may need to be prepared.
     - robertdebock.epel
 
   tasks:
-    - name: create /data
+    - name: create directories in container
       file:
         path: "{{ item }}"
         state: directory
@@ -48,12 +47,10 @@ The machine you are running this on, may need to be prepared.
         - /data/in
         - /data/out
 
-    - name: copy samples files to /data
+    - name: copy samples files to /data/in
       copy:
-        src: "{{ item }}"
+        src: in/
         dest: /data/in
-      with_items:
-        - in/sample.jpg
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -66,16 +63,16 @@ These variables are set in `defaults/main.yml`:
 ---
 # defaults file for y
 
+# y_presets is a list of presets that will be applied to images.
+# y_presets:
+#   - name: monochrome
+
+# y_import_from defines the path where to pickup files from.
+# This could be /dev/sdb1 (for some SD-card) for example.
 y_import_from: /tmp/import
+
+# y_export_to is the path where the images will be saved.
 y_export_to: /tmp/export
-
-y_presets:
-  - name: monochrome
-
-# y_sizes:
-#   - thumbnail
-#   - large
-#   - original
 ```
 
 Requirements
@@ -112,7 +109,7 @@ This role has been tested against the following distributions and Ansible versio
 |alpine-edge*|yes|yes|yes*|
 |alpine-latest|yes|yes|yes*|
 |archlinux|yes|yes|yes*|
-|centos-6|yes|yes|yes*|
+|centos-6|no|no|no*|
 |centos-latest|yes|yes|yes*|
 |debian-stable|yes|yes|yes*|
 |debian-unstable*|yes|yes|yes*|
@@ -125,6 +122,14 @@ This role has been tested against the following distributions and Ansible versio
 
 A single star means the build may fail, it's marked as an experimental build.
 
+Exceptions
+----------
+
+Some variarations of the build matrix do not work. These are the variations and reasons why the build won't work:
+
+| variation                 | reason                 |
+|---------------------------|------------------------|
+| CentOS 6 | Somehow ImageMagick creates a different file each run. Not idempotent. |
 
 
 
