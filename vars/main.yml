@@ -3,19 +3,9 @@
 _y_requirements:
   default:
     - imagemagick
-  Alpine:
-    - imagemagick
-  Archlinux:
-    - imagemagick
-  CentOS:
+  RedHat:
     - ImageMagick
-  Debian:
-    - imagemagick
-  Fedora:
+  Suse:
     - ImageMagick
-  openSUSE Leap:
-    - ImageMagick
-  Ubuntu:
-    - imagemagick
 
-y_requirements: "{{ _y_requirements[ansible_distribution] | default(_y_requirements['default']) }}"
+y_requirements: "{{ _y_requirements[ansible_os_family] | default(_y_requirements['default']) }}"
