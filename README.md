@@ -6,6 +6,9 @@ y
 
 Process images
 
+<img src="https://img.shields.io/ansible/role/d/39414"/>
+<img src="https://img.shields.io/ansible/quality/39414"/>
+
 Example Playbook
 ----------------
 
@@ -88,6 +91,17 @@ The following roles can be installed to ensure all requirements are met, using `
 - robertdebock.bootstrap
 - robertdebock.epel
 
+```
+
+This role uses the following modules:
+```yaml
+---
+- command
+- fetch
+- file
+- find
+- include
+- package
 ```
 
 Context
