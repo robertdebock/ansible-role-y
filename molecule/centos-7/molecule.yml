@@ -8,8 +8,8 @@ lint:
 driver:
   name: docker
 platforms:
-  - name: y-centos-6
-    image: centos:6
+  - name: y-centos-7
+    image: centos:7
     pre_build_image: yes
 provisioner:
   name: ansible
@@ -23,4 +23,4 @@ provisioner:
         - meta/version.yml
         - meta/exception.yml
 scenario:
-  name: centos-6
+  name: centos-7
