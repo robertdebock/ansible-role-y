@@ -3,3 +3,4 @@ molecule/*/.molecule
 *.swp
 molecule/resources/out
 .DS_Store
+.tox
