@@ -4,7 +4,10 @@ y
 <img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="right"/>
 <a href="https://travis-ci.org/robertdebock/ansible-role-y"><img src="https://travis-ci.org/robertdebock/ansible-role-y.svg?branch=master" alt="Build status" align="left"/></a>
 
-Import and process RAW files.
+Process images
+
+<img src="https://img.shields.io/ansible/role/d/39414"/>
+<img src="https://img.shields.io/ansible/quality/39414"/>
 
 Example Playbook
 ----------------
@@ -17,13 +20,12 @@ This example is taken from `molecule/resources/playbook.yml`:
   become: yes
   gather_facts: yes
 
-  vars:
-    y_import_from: /data/in
-    y_export_to: out
-    y_preset: monochrome
-
   roles:
-    - robertdebock.y
+    - role: robertdebock.y
+      y_import_from: /data/in
+      y_export_to: out
+      y_presets:
+        - name: monochrome
 ```
 
 The machine you are running this on, may need to be prepared.
@@ -39,7 +41,7 @@ The machine you are running this on, may need to be prepared.
     - robertdebock.epel
 
   tasks:
-    - name: create /data
+    - name: create directories in container
       file:
         path: "{{ item }}"
         state: directory
@@ -48,12 +50,10 @@ The machine you are running this on, may need to be prepared.
         - /data/in
         - /data/out
 
-    - name: copy samples files to /data
+    - name: copy samples files to /data/in
       copy:
-        src: "{{ item }}"
+        src: in/
         dest: /data/in
-      with_items:
-        - sample.RAF
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -66,13 +66,16 @@ These variables are set in `defaults/main.yml`:
 ---
 # defaults file for y
 
+# y_presets is a list of presets that will be applied to images.
+# y_presets:
+#   - name: monochrome
+
+# y_import_from defines the path where to pickup files from.
+# This could be /dev/sdb1 (for some SD-card) for example.
 y_import_from: /tmp/import
+
+# y_export_to is the path where the images will be saved.
 y_export_to: /tmp/export
-
-y_convert_images: yes
-
-y_preset:
-  - name: monochrome
 ```
 
 Requirements
@@ -90,6 +93,17 @@ The following roles can be installed to ensure all requirements are met, using `
 
 ```
 
+This role uses the following modules:
+```yaml
+---
+- command
+- fetch
+- file
+- find
+- include
+- package
+```
+
 Context
 -------
 
@@ -102,25 +116,34 @@ Here is an overview of related roles:
 Compatibility
 -------------
 
-This role has been tested against the following distributions and Ansible version:
+This role has been tested on these [container images](https://hub.docker.com/):
 
-|distribution|ansible 2.7|ansible 2.8|ansible devel|
-|------------|-----------|-----------|-------------|
-|alpine-edge*|no|no|no*|
-|alpine-latest|no|no|no*|
-|archlinux|yes|yes|yes*|
-|centos-6|yes|yes|yes*|
-|centos-latest|no|no|no*|
-|debian-stable|yes|yes|yes*|
-|debian-unstable*|yes|yes|yes*|
-|fedora-latest|yes|yes|yes*|
-|fedora-rawhide*|yes|yes|yes*|
-|opensuse-leap|no|no|no*|
-|ubuntu-devel*|yes|yes|yes*|
-|ubuntu-latest|yes|yes|yes*|
-|ubuntu-rolling|yes|yes|yes*|
+|container|allow_failures|
+|---------|--------------|
+|docker-alpine-openrc|yes|
+|docker-alpine-openrc|yes|
+|docker-centos-systemd|no|
+|docker-centos-systemd|no|
+|docker-debian-systemd|yes|
+|docker-debian-systemd|yes|
+|docker-debian-systemd|yes|
+|docker-fedora-systemd|yes|
+|docker-fedora-systemd|yes|
+|opensuse/|no|
+|docker-ubuntu-systemd|yes|
+|docker-ubuntu-systemd|yes|
+|docker-ubuntu-systemd|yes|
 
-A single star means the build may fail, it's marked as an experimental build.
+This role has been tested on these Ansible versions:
+
+- ansible~=2.7
+- ansible~=2.8
+- git+https://github.com/ansible/ansible.git@devel
+
+The indicator '~=' means [compatible with](https://www.python.org/dev/peps/pep-0440/#compatible-release). For example 'ansible~=2.8' would pick the latest ansible-2.8, for example ansible-2.8.5.
+
+
+
 
 Testing
 -------
