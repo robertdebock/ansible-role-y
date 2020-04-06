@@ -33,8 +33,8 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
   gather_facts: no
 
   roles:
-    - robertdebock.bootstrap
-    - robertdebock.epel
+    - role: robertdebock.bootstrap
+    - role: robertdebock.epel
 
   tasks:
     - name: create directories in container
