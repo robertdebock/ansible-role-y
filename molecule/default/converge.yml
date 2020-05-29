@@ -7,6 +7,6 @@
   roles:
     - role: ansible-role-y
       y_import_from: /data/in
-      y_export_to: out
+      y_export_to: files/out
       y_presets:
         - name: monochrome
