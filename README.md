@@ -11,7 +11,7 @@ Process images
 This example is taken from `molecule/resources/converge.yml` and is tested on each push, pull request and release.
 ```yaml
 ---
-- name: Converge
+- name: converge
   hosts: all
   become: yes
   gather_facts: yes
@@ -19,7 +19,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
   roles:
     - role: robertdebock.y
       y_import_from: /data/in
-      y_export_to: out
+      y_export_to: files/out
       y_presets:
         - name: monochrome
 ```
@@ -27,7 +27,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
 The machine may need to be prepared using `molecule/resources/prepare.yml`:
 ```yaml
 ---
-- name: Converge
+- name: prepare
   hosts: all
   become: yes
   gather_facts: no
@@ -109,15 +109,17 @@ Here is an overview of related roles:
 
 ## Compatibility
 
-This role has been tested on these [container images](https://hub.docker.com/):
+This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
 
 |container|tags|
 |---------|----|
-|amazon|all|
-|debian|all|
+|alpine|all|
+|amazon|2018.03|
 |el|7, 8|
-|fedora|all|
-|ubuntu|bionic|
+|debian|buster, bullseye|
+|fedora|31, 32|
+|opensuse|all|
+|ubuntu|focal, bionic, xenial|
 
 The minimum version of Ansible required is 2.8 but tests have been done to:
 
