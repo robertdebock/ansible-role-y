@@ -13,6 +13,7 @@
       - item.name is defined
       - item.name | length > 0
       - item.name in ["monochrome"]
+    quiet: yes
   loop: "{{ y_presets }}"
   when:
     - y_presets is defined
