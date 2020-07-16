@@ -7,9 +7,6 @@
   package:
     name: "{{ y_requirements }}"
     state: present
-  register: y_install_requirements
-  until: y_install_requirements is succeeded
-  retries: 3
 
 - name: create export directory
   file:
