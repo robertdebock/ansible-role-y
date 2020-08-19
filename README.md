@@ -4,7 +4,7 @@ Process images
 
 |Travis|GitHub|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![travis](https://travis-ci.com/robertdebock/ansible-role-y.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-y)|[![github](https://github.com/robertdebock/ansible-role-y/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-y/actions)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/y)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/y)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-y.svg)](https://github.com/robertdebock/ansible-role-y/releases/)|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-y.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-y)|[![github](https://github.com/robertdebock/ansible-role-y/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-y/actions)|[![quality](https://img.shields.io/ansible/quality/39414)](https://galaxy.ansible.com/robertdebock/y)|[![downloads](https://img.shields.io/ansible/role/d/39414)](https://galaxy.ansible.com/robertdebock/y)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-y.svg)](https://github.com/robertdebock/ansible-role-y/releases/)|
 
 ## [Example Playbook](#example-playbook)
 

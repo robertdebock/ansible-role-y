@@ -3,6 +3,7 @@
   assert:
     that:
       - y_presets | length > 0
+    quiet: yes
   when:
     - y_presets is defined
 
@@ -25,9 +26,11 @@
     that:
       - y_import_from is defined
       - y_import_from | length > 0
+    quiet: yes
 
 - name: test if y_export_to is set correctly
   assert:
     that:
       - y_export_to is defined
       - y_export_to | length > 0
+    quiet: yes
