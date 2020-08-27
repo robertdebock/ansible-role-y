@@ -12,6 +12,7 @@
   file:
     path: "{{ y_export_to }}"
     state: directory
+    mode: "0755"
 
 - name: find files to convert {{ y_import_from }}
   find:
