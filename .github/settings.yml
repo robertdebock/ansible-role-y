@@ -5,3 +5,4 @@
 repository:
   description: Process images
   homepage: https://robertdebock.nl/
+  topics: y, photography, raw, processing, ansible, molecule, tox, playbook, hacktoberfest

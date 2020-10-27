@@ -1,4 +1,4 @@
----
+---  # noqa 106
 - name: convert to monochrome
   command: convert {{ image.path }} -monochrome {{ image.path }}
   changed_when: no

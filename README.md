@@ -41,6 +41,7 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
       file:
         path: "{{ item }}"
         state: directory
+        mode: "0644"
       with_items:
         - /data
         - /data/in
@@ -50,15 +51,16 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
       copy:
         src: in/
         dest: /data/in
+        mode: "0644"
 ```
 
-For verification `molecule/resources/verify.yml` run after the role has been applied.
+For verification `molecule/resources/verify.yml` runs after the role has been applied.
 ```yaml
 ---
 - name: Verify
   hosts: all
   become: yes
-  gather_facts: yes
+  gather_facts: no
 
   tasks:
     - name: check if connection still works
@@ -121,9 +123,9 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |opensuse|all|
 |ubuntu|focal, bionic, xenial|
 
-The minimum version of Ansible required is 2.8 but tests have been done to:
+The minimum version of Ansible required is 2.9, tests have been done to:
 
-- The previous version, on version lower.
+- The previous version.
 - The current version.
 - The development version.
 
