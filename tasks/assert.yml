@@ -4,6 +4,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
       - item.name in [ "monochrome" ]
     quiet: yes
   loop: "{{ y_presets }}"
@@ -16,10 +17,12 @@
   assert:
     that:
       - y_import_from is defined
+      - y_import_from is string
     quiet: yes
 
 - name: test if y_export_to is set correctly
   assert:
     that:
       - y_export_to is defined
+      - y_export_to is string
     quiet: yes
