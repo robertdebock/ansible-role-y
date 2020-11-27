@@ -1,19 +1,10 @@
 ---
-- name: test if y_presets is set correctly
-  assert:
-    that:
-      - y_presets | length > 0
-    quiet: yes
-  when:
-    - y_presets is defined
-
 
 - name: test if item in y_presets is set correctly
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
-      - item.name in ["monochrome"]
+      - item.name in [ "monochrome" ]
     quiet: yes
   loop: "{{ y_presets }}"
   loop_control:
@@ -25,12 +16,10 @@
   assert:
     that:
       - y_import_from is defined
-      - y_import_from | length > 0
     quiet: yes
 
 - name: test if y_export_to is set correctly
   assert:
     that:
       - y_export_to is defined
-      - y_export_to | length > 0
     quiet: yes
