@@ -2,22 +2,23 @@
 # tasks file for y
 
 - name: include assert.yml
-  include_tasks: assert.yml
+  import_tasks: assert.yml
   run_once: yes
+  delegate_to: localhost
 
 - name: install requirements
-  package:
+  ansible.builtin.package:
     name: "{{ y_requirements }}"
     state: present
 
 - name: create export directory
-  file:
+  ansible.builtin.file:
     path: "{{ y_export_to }}"
     state: directory
     mode: "0755"
 
 - name: find files to convert {{ y_import_from }}
-  find:
+  ansible.builtin.find:
     path: "{{ y_import_from }}"
     patterns: "*.jpg"
   when:
@@ -25,7 +26,7 @@
   register: y_find
 
 - name: loop over found images
-  include: image.yml
+  ansible.builtin.include: image.yml
   loop: "{{ y_find.files }}"
   loop_control:
     loop_var: image
@@ -35,7 +36,7 @@
     - y_find.files
 
 - name: copy converted images back
-  fetch:
+  ansible.builtin.fetch:
     src: "{{ item.path }}"
     dest: "{{ y_export_to }}/{{ item.path | basename }}"
     flat: yes

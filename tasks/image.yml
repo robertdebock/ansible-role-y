@@ -1,4 +1,4 @@
 ---
 - name: apply presets
-  include: "{{ item.name }}.yml"
+  ansible.builtin.include: "{{ item.name }}.yml"
   loop: "{{ y_presets }}"

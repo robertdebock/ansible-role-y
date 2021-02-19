@@ -3,8 +3,9 @@
 #
 exclude_paths:
   - ./meta/preferences.yml
+  - ./molecule/default/prepare.yml
+  - ./molecule/default/converge.yml
   - ./molecule/default/verify.yml
+  - ./molecule/default/collections.yml
   - ./.tox
-
-skip_list:
-  - '106'  # Role name {} does not match ``^[a-z][a-z0-9_]+$`` pattern       │
+  - ./.cache
