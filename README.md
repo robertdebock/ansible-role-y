@@ -38,7 +38,7 @@ The machine needs to be prepared in CI this is done using `molecule/resources/pr
 
   tasks:
     - name: create directories in container
-      file:
+      ansible.builtin.file:
         path: "{{ item }}"
         state: directory
         mode: "0644"
@@ -48,7 +48,7 @@ The machine needs to be prepared in CI this is done using `molecule/resources/pr
         - /data/out
 
     - name: copy samples files to /data/in
-      copy:
+      ansible.builtin.copy:
         src: in/
         dest: /data/in
         mode: "0644"
