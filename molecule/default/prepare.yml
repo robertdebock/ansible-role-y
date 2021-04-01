@@ -10,7 +10,7 @@
 
   tasks:
     - name: create directories in container
-      file:
+      ansible.builtin.file:
         path: "{{ item }}"
         state: directory
         mode: "0644"
@@ -20,7 +20,7 @@
         - /data/out
 
     - name: copy samples files to /data/in
-      copy:
+      ansible.builtin.copy:
         src: in/
         dest: /data/in
         mode: "0644"
