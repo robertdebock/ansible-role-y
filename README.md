@@ -1,5 +1,7 @@
 # [y](#y)
 
+THIS ROLE HAS BEEN ARCHIVED AND IS NOT MAINTAINED.
+
 Process images
 
 |GitHub|GitLab|Quality|Downloads|Version|
